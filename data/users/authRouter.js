@@ -22,7 +22,7 @@ router.post("/login", (req, res) => {
     Users.findBy({ username })
         .first()
         .then(user => {
-            if (user && bcrypt.compareSync(password, user.credentials.password)) {
+            if (user && bcrypt.compareSync(password, user.password)) {
                 const token = signToken(user);
                 res.status(200).json({
                     token,
@@ -40,7 +40,7 @@ router.post("/login", (req, res) => {
 function signToken(user) {
     const payload = {
         username: user.username,
-        password: user.password,
+        user: "student",
     };
 
     const secret = process.env.JWT_SECRET || "is it secret, is it safe?";

@@ -13,15 +13,15 @@ const Login = (props) => {
 
     const login = e => {
         e.preventDefault();
-        axios
+        axiosWithAuth()
             .post("/api/auth/login", credentials)
             .then(res => {
                 console.log("res", res)
-                localStorage.setItem("token", res.data.token);
-                if ("token" ? setLoggedIn(true) : null);
-                return props.history.push("/main")
+                // localStorage.setItem("token", res.token);
+                // if ("token" ? setLoggedIn(true) : null);
+                // return props.history.push("/main")
             })
-            .catch(err => console.log(err.response))
+            .catch(err => console.log(err))
     }
 
     const handleChange = e => {

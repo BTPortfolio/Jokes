@@ -1,6 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import axios from "axios";
+import styled from "styled-components";
+
+const Container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .jokeCard{
+        width: 40%;
+        padding: 2%;
+        margin: 2%;
+        text-align: center;
+        border: 1px black solid;
+        border-radius: 10px;
+    }
+`;
 
 const Main = () => {
 
@@ -17,16 +33,16 @@ const Main = () => {
     }, [])
 
     return (
-        <div>
+        <Container>
             {jokes.map((i) => {
                 return (
-                    <div>
+                    <div className="jokeCard">
                         <h4>{i.setup}</h4>
                         <h5>{i.punchline}</h5>
                     </div>
                 )
             })}
-        </div>
+        </Container>
     );
 }
 

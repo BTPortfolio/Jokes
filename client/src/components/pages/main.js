@@ -21,6 +21,10 @@ const Container = styled.div`
 const Main = () => {
 
     const [jokes, setJokes] = useState([]);
+    const categories = [
+        "Animals",
+        "Space"
+    ]
 
     useEffect(() => {
         axios
@@ -34,6 +38,12 @@ const Main = () => {
 
     return (
         <Container>
+            <div className="categories">
+                <button>Animals</button>
+                <button>Space</button>
+                {/* <button></button>
+                <button></button> */}
+            </div>
             {jokes.map((i) => {
                 return (
                     <div className="jokeCard">

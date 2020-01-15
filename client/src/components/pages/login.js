@@ -5,26 +5,24 @@ import axios from "axios";
 const Login = (props) => {
 
     const [credentials, setCredentials] = useState({
-        username: '',
-        password: ''
+        username: 'username',
+        password: 'password'
     });
 
     const [loggedIn, setLoggedIn] = useState(false)
 
     const login = e => {
         e.preventDefault();
-        axiosWithAuth()
-            .post("/api/login", credentials)
+        axios
+            .post("/api/auth/login", credentials)
             .then(res => {
                 console.log("res", res)
-                localStorage.setItem("token", res.data.payload);
-                if ("token") {
-                    setLoggedIn(true);
-                    return props.history.push("/main")
-                }
+                localStorage.setItem("token", res.data.token);
+                if ("token" ? setLoggedIn(true) : null);
+                return props.history.push("/main")
             })
             .catch(err => console.log(err.response))
-    };
+    }
 
     const handleChange = e => {
         setCredentials({

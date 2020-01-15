@@ -9,6 +9,7 @@ const UsersRouter = require('./data/users/userRouter.js');
 const server = express();
 
 server.use(express.json());
+server.use(cors())
 server.use('/api/jokes', JokesRouter);
 server.use('/api/longJokes', LongJokesRouter);
 server.use('/api/users', UsersRouter);

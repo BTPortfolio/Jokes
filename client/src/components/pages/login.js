@@ -19,7 +19,7 @@ const Login = (props) => {
                 console.log("res", res)
                 localStorage.setItem("token", res.data.token);
                 if ("token" ? setLoggedIn(true) : null);
-                return props.history.push("/main")
+                return props.history.push("/loggedIn")
             })
             .catch(err => console.log(err))
     }

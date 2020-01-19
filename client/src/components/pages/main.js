@@ -29,43 +29,45 @@ const Container = styled.div`
 const Main = () => {
 
     const [jokes, setJokes] = useState([]);
-    const categories = [
-        "Animals",
-        "Space"
-    ]
-
-    const categoryWidth = 100 / categories.length;
+    const [searchResults, setSearchResults] = useState([])
+    const [searchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/api/jokes")
+            .get(`http://localhost:5000/api/jokes`)
             .then(res => {
-                console.log(res, "this is res for jokes")
-                setJokes(res.data);
-                console.log(categoryWidth);
+                setJokes(res.data)
             })
             .catch(err => console.log(err))
     }, [])
 
-    const filterJokes = () => {
-
-    }
+    useEffect(() => {
+        axios
+            .get(`http://localhost:5000/api/jokes/${searchTerm}`)
+            .then(res => {
+                setJokes(res.data)
+                setSearchResults(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [searchTerm])
 
     return (
         <Container>
             <div className="categories">
-                {categories.map(i => {
-                    return <button>{i}</button>
-                })}
+                <button onClick={() => setSearchTerm('')}>All</button>
+                <button onClick={() => setSearchTerm("animals")}>Animals</button>
+                <button onClick={() => setSearchTerm("space")}>Space</button>
             </div>
             <div className="jokes">
                 {jokes.map((i) => {
+
                     return (
                         <div className="jokeCard">
                             <h4>{i.setup}</h4>
                             <h5>{i.punchline}</h5>
                         </div>
                     )
+
                 })}
             </div>
         </Container>

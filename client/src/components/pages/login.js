@@ -17,9 +17,9 @@ const Login = (props) => {
             .post("/api/auth/login", credentials)
             .then(res => {
                 console.log("res", res)
-                // localStorage.setItem("token", res.token);
-                // if ("token" ? setLoggedIn(true) : null);
-                // return props.history.push("/main")
+                localStorage.setItem("token", res.data.token);
+                if ("token" ? setLoggedIn(true) : null);
+                return props.history.push("/main")
             })
             .catch(err => console.log(err))
     }
